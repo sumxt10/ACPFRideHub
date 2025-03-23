@@ -61,7 +61,7 @@ const SignUpPage = ({ navigation }) => {
         </Text>
       </View>
 
-      <TouchableOpacity style={styles.signupButton}>
+      <TouchableOpacity style={styles.signupButton} onPress={() => navigation.navigate("Home")}>
         <Text style={styles.signupText}>Sign Up</Text>
       </TouchableOpacity>
 

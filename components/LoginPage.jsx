@@ -44,7 +44,7 @@ const LoginPage = ({ navigation }) => {
         <Text style={styles.forgotPassword}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginButton}>
+      <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate("Home")}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
