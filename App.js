@@ -1,20 +1,18 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet } from "react-native";
-import LoginPage from "./components/LoginPage"; // Import the LoginPage component
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import LoginPage from "./components/LoginPage";
+import SignUpPage from "./components/SignUpPage";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <LoginPage /> {/* Render your LoginPage here */}
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name="SignUp" component={SignUpPage} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
