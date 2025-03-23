@@ -47,7 +47,7 @@ const HomePage = ({ navigation }) => {
 
         {/* Action Buttons */}
         <View style={styles.actionButtons}>
-          <TouchableOpacity style={styles.actionButton}>
+          <TouchableOpacity style={styles.actionButton} onPress={() => navigation.navigate("UpcomingRides")}>
             <FontAwesome5 name="bicycle" size={24} color="#007bff" />
             <Text style={styles.actionText}>Upcoming Rides</Text>
           </TouchableOpacity>
