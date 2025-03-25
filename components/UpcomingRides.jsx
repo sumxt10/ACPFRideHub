@@ -116,7 +116,7 @@ const UpcomingRides = ({ navigation }) => {
 
             {/* View Details Section */}
             <View style={styles.viewDetailsContainer}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate("RideDetails", { ride })}>
                 <Text style={styles.viewDetailsText}>View Details</Text>
               </TouchableOpacity>
             </View>

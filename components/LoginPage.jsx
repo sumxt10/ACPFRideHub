@@ -13,7 +13,7 @@ const LoginPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image source={require("../assets/logo.png")} style={styles.logo} />
-      <Text style={styles.title}>ACP RideHub</Text>
+      <Text style={styles.title}>ACPF RideHub</Text>
       <Text style={styles.subtitle}>Welcome Back !</Text>
 
       <View style={styles.inputContainer}>
