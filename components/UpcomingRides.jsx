@@ -126,7 +126,7 @@ const UpcomingRides = ({ navigation }) => {
               <View style={[styles.statusBadge, styles[ride.status.replace(" ", "").toLowerCase()]]}>
                 <Text style={styles.statusText}>{ride.status}</Text>
               </View>
-              <TouchableOpacity style={styles.enrollButton}>
+              <TouchableOpacity style={styles.enrollButton} onPress={() => navigation.navigate("RideEnrollment", { ride })}>
                 <Text style={styles.enrollText}>Enroll Now</Text>
               </TouchableOpacity>
             </View>

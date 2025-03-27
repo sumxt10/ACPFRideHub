@@ -95,7 +95,7 @@ const HomePage = ({ navigation }) => {
               <Text style={styles.eventDetails}>Pune Hills</Text>
             </View>
 
-            <TouchableOpacity style={styles.enrollButton}>
+            <TouchableOpacity style={styles.enrollButton} >
               <Text style={styles.enrollText}>Enroll Now</Text>
             </TouchableOpacity>
           </View>

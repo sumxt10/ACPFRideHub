@@ -87,8 +87,8 @@ const RideDetails = ({ navigation, route }) => {
           </Text>
           <Text style={styles.totalRidersText}>Total: 50 riders</Text>
         </View>
-        <TouchableOpacity style={styles.registerButton}>
-          <Text style={styles.registerText}>Register Now</Text>
+        <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate("RideEnrollment", { ride })}>
+          <Text style={styles.registerText}>Enroll Now</Text>
         </TouchableOpacity>
 
         {/* Route Map Placeholder */}

@@ -6,6 +6,7 @@ import SignUpPage from "./components/SignUpPage";
 import HomePage from "./components/HomePage";
 import UpcomingRides from "./components/UpcomingRides";
 import RideDetails from "./components/RideDetails";
+import RideEnrollment from "./components/RideEnrollment";
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="UpcomingRides" component={UpcomingRides} />
         <Stack.Screen name="RideDetails" component={RideDetails} />
+        <Stack.Screen name="RideEnrollment" component={RideEnrollment} />
       </Stack.Navigator>
     </NavigationContainer>
   );
