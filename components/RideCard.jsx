@@ -3,6 +3,8 @@ import React from 'react'
 import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 
 const RideCard = ({ navigation, ride, viewDetails, enroll }) => {
+  ride = ride.item;
+
   return (
     <View style={styles.cardContainer}>
       <View style={styles.titleContainer}>
@@ -89,10 +91,12 @@ const styles = StyleSheet.create({
   },
   enrollButton: {
     backgroundColor: "#0057FF",
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 15,
     marginTop: 10,
     borderRadius: 15,
+    borderColor: "#0057FF",
+    borderWidth: 2,
     alignItems: "center"
   },
   enrollText: {

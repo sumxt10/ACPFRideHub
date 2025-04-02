@@ -2,27 +2,27 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 
-const EventCard = ({ title, date, time, location, onPress }) => {
+const EventCard = ({ ride, viewDetails }) => {
   return (
     <View style={styles.eventCard}>
       <View style={styles.detailsCard}>
-        <Text style={styles.eventTitle}>{title}</Text>
+        <Text style={styles.eventTitle}>{ride.title}</Text>
         <View style={styles.detailsContainer}>
           <Image source={require("../assets/calendar.png")} style={styles.icon}></Image>
-          <Text style={styles.eventDetails}>{date}</Text>
+          <Text style={styles.eventDetails}>{ride.date}</Text>
         </View>
         <View style={styles.detailsContainer}>
           <Image source={require("../assets/clock.png")} style={styles.icon}></Image>
-          <Text style={styles.eventDetails}>{time}</Text>
+          <Text style={styles.eventDetails}>{ride.time}</Text>
         </View>
         <View style={styles.detailsContainer}>
           <Image source={require("../assets/location.png")} style={styles.icon}></Image>
-          <Text style={styles.eventDetails}>{location}</Text>
+          <Text style={styles.eventDetails}>{ride.location}</Text>
         </View>
       </View>
 
-      <TouchableOpacity style={styles.enrollButton} onPress={onPress}>
-          <Text style={styles.enrollText}>Enroll Now</Text>
+      <TouchableOpacity style={styles.viewDetailsButton} onPress={() => {viewDetails(ride)}}>
+          <Text style={styles.viewDetailsText}>View Details</Text>
       </TouchableOpacity>
     </View>
   )
@@ -55,16 +55,16 @@ const styles = StyleSheet.create({
   eventDetails: {
     marginLeft: 5,
     paddingVertical: 3,
-    color: "#666",
+    color: "#666"
   },
-  enrollButton: {
+  viewDetailsButton: {
     backgroundColor: "#0057FF",
     padding: 10,
     borderRadius: 5,
     marginTop: 5,
     alignItems: "center",
   },
-  enrollText: {
+  viewDetailsText: {
     color: "#fff",
     fontWeight: "bold"
   },

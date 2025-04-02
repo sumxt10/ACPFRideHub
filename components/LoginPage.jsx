@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,49 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 
 const LoginPage = ({ navigation }) => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const submitHandler = async (e) => {
+    console.log(email)
+    console.log(password)
+    e.preventDefault();
+    if(!email || email.length === 0 || !password || password.length === 0) {
+        setError("Email or Password not provided");
+        return;
+    }
+    
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    
+    let raw = JSON.stringify({
+        "email": email,
+        "password": password
+    });
+
+    let requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+    };
+
+    fetch(`http://localhost:${process.env.PORT}/login`, requestOptions)
+    .then(response => response.json())
+    .then(result => {
+        if(!result.success) {
+          console.log("Error: " + str(result.message))
+          return;
+        }
+        console.log('User Login Successful');
+        navigation.navigate("Home");
+    })
+    .catch(error => {
+        console.error("Error: ", error);
+    });
+  }
+
   return (
     <View style={styles.container}>
       <Image source={require("../assets/logo.png")} style={styles.logo} />
@@ -23,7 +66,12 @@ const LoginPage = ({ navigation }) => {
           color="#666"
           style={styles.icon}
         />
-        <TextInput placeholder="Email or Phone Number" style={styles.input} />
+        <TextInput
+          placeholder="Email or Phone Number"
+          style={styles.input}
+          value={email}
+          onChangeText={setEmail}
+        />
       </View>
 
       <View style={styles.inputContainer}>
@@ -37,6 +85,8 @@ const LoginPage = ({ navigation }) => {
           placeholder="Password"
           style={styles.input}
           secureTextEntry
+          value={password}
+          onChangeText={setPassword}
         />
       </View>
 
@@ -44,7 +94,7 @@ const LoginPage = ({ navigation }) => {
         <Text style={styles.forgotPassword}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate("Home")}>
+      <TouchableOpacity style={styles.loginButton} onPress={() => submitHandler()}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 

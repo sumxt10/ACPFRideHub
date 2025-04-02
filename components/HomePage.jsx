@@ -14,16 +14,18 @@ import EventCard from "./EventCard";
 const HomePage = ({ navigation }) => {
   const rides = [
     {
+      id: 1,
       day: "SAT",
       date: "Mar 15, 2025",
       time: "8:00 AM",
       title: "Weekend City Explorer",
-      location: "Central Park, New York",
+      location: "Central Park",
       distance: "15 km",
       duration: "1.5 hrs",
       status: "Available",
     },
     {
+      id: 2,
       day: "SUN",
       date: "Mar 16,2025",
       time: "7:00 AM",
@@ -34,6 +36,7 @@ const HomePage = ({ navigation }) => {
       status: "Almost Full",
     },
     {
+      id: 3,
       day: "THU",
       date: "Mar 20, 2025",
       time: "7:30 AM",
@@ -44,6 +47,7 @@ const HomePage = ({ navigation }) => {
       status: "Available",
     },
     {
+      id: 4,
       day: "SAT",
       date: "Mar 22, 2025",
       time: "7:00 AM",
@@ -54,6 +58,10 @@ const HomePage = ({ navigation }) => {
       status: "Closed",
     },
   ];
+
+  const viewDetails = (ride) => {
+    navigation.navigate("RideDetails", {ride});
+  }
 
   return (
     <View style={styles.container}>
@@ -120,17 +128,13 @@ const HomePage = ({ navigation }) => {
           style={styles.eventsScroll}
         >
           <EventCard
-            title={"Weekend Mountain Trail"}
-            date={"Sat, Feb 24"}
-            time={"7:00 AM"}
-            location={"Pune Hills"}
+            ride={rides[0]}
+            viewDetails={viewDetails}
           />
 
           <EventCard
-            title={"City Night Ride"}
-            date={"Sun, Feb 25"}
-            time={"6:00 PM"}
-            location={"City Center"}
+            ride={rides[1]}
+            viewDetails={viewDetails}
           />
         </ScrollView>
 
@@ -249,8 +253,9 @@ const styles = StyleSheet.create({
     paddingTop: 5
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: "bold"
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10
   },
   communityTitle: {
     fontSize: 18,
@@ -259,7 +264,8 @@ const styles = StyleSheet.create({
     paddingLeft: 20
   },
   viewAll: {
-    color: "#007bff"
+    color: "#007bff",
+    fontWeight: 450
   },
 
   eventsScroll: {

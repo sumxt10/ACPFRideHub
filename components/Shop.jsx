@@ -25,6 +25,10 @@ const Shop = ({ navigation }) => {
     },
   ]
 
+  const onViewDetailsButtonPressed = (item) => {
+    navigation.navigate("ItemDetails", {item});
+  }
+
   return ( 
     <View style={styles.container}>
       {/* Header */}
@@ -37,9 +41,9 @@ const Shop = ({ navigation }) => {
 
       <FlatList
         data={items}
-        numColumns={1}
-        renderItem={({item}) => <ShopItem item={item} />}
+        renderItem={(item) => <ShopItem item={item} onViewDetailsButtonPressed={onViewDetailsButtonPressed} />}
         keyExtractor={(item) => item.id.toString()}
+        numColumns={1}
       />
 
     </View>

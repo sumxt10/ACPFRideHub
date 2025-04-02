@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 25
+    paddingTop: 30
   },
   header: {
     flexDirection: "row",
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     marginTop: 5,
+    marginBottom: 25,
     fontSize: 16,
     fontWeight: 500,
     color: "#888888"
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#F2F2F7",
     paddingHorizontal: 30,
-    paddingVertical: 30,
+    paddingVertical: 35,
     marginVertical: 40
   },
   detailsCard: {
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     borderRadius: 15
   },
   rideTitle: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10
   },
@@ -115,6 +116,7 @@ const styles = StyleSheet.create({
   },
   details: {
     marginVertical: 4,
+    fontSize: 18
   },
   bottomNav: {
     flexDirection: "row",

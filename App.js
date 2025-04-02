@@ -9,6 +9,7 @@ import RideDetails from "./components/RideDetails";
 import RideEnrollment from "./components/RideEnrollment";
 import SuccessfulRegistration from "./components/SuccessfulRegistration";
 import Shop from "./components/Shop";
+import ItemDetails from "./components/ItemDetails";
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Screen name="RideEnrollment" component={RideEnrollment} />
         <Stack.Screen name="SuccessfulRegistration" component={SuccessfulRegistration} />
         <Stack.Screen name="Shop" component={Shop} />
+        <Stack.Screen name="ItemDetails" component={ItemDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -87,23 +87,19 @@ const UpcomingRides = ({ navigation }) => {
       </View>
 
       {/* Rides List */}
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.ridesList}>
-        {/* <FlatList
-          data={rides}
-          renderItem={(ride) => 
-            <RideCard 
-              ride={ride}
-              viewDetails={onViewDetailsButtonPress}
-              enroll={onEnrollButtonPress} 
-            />
-          }
-          keyExtractor={(ride) => ride.id.toString()}
-          numColumns={1}
-        /> */}
-        {rides.map((ride, index) => (
-            <RideCard ride={ride} viewDetails={onViewDetailsButtonPress} enroll={onEnrollButtonPress} key={index} />
-        ))}
-      </ScrollView>
+      <FlatList
+        data={rides}
+        renderItem={(ride) => 
+          <RideCard 
+            ride={ride}
+            viewDetails={onViewDetailsButtonPress}
+            enroll={onEnrollButtonPress} 
+          />
+        }
+        keyExtractor={(ride) => ride.id.toString()}
+        numColumns={1}
+        contentContainerStyle={styles.ridesList}
+      />
     </View>
   );
 };
@@ -145,144 +141,6 @@ const styles = StyleSheet.create({
   ridesList: {
     paddingHorizontal: 15,
     marginTop: 10
-  },
-
-  rideCard: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 15,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  
-  rideImageContainer: {
-    position: "relative",
-    borderRadius: 12,
-    overflow: "hidden"
-  },
-  rideImage: {
-    width: "100%",
-    height: 150,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10
-  },
-
-  dayBadge: {
-    position: "absolute",
-    top: 10,
-    left: 10,
-    backgroundColor: "#fff",
-    paddingVertical: 4,
-    paddingHorizontal: 6,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  dayText: {
-    fontSize: 12,
-    fontWeight: "bold",
-    color: "#333"
-  },
-  dateText: {
-    fontSize: 10,
-    color: "#666"
-  },
-
-  rideDetails: {
-    paddingVertical: 10,
-    paddingHorizontal: 5
-  },
-  rideTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#000",
-    marginBottom: 4
-  },
-
-  infoRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 6
-  },
-  rideInfo: {
-    marginLeft: 6,
-    marginRight: 6,
-    color: "#444",
-    fontSize: 13,
-    fontWeight: "500"
-  },
-
-  levelBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 12,
-    marginLeft: 8
-  },
-  easy: {
-    backgroundColor: "#28a745"
-  },
-  medium: {
-    backgroundColor: "#ff9800"
-  },
-  hard: {
-    backgroundColor: "#ff4444"
-  },
-  levelText: {
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "bold"
-  },
-
-  viewDetailsContainer: {
-    marginTop: 10,
-    paddingHorizontal: 5
-  },
-  viewDetailsText: {
-    color: "#0057FF",
-    fontSize: 14,
-    fontWeight: "600"
-  },
-
-  rideActions: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 10,
-    paddingHorizontal: 4
-  },
-  statusBadge: {
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 5
-  },
-
-  available: {
-    backgroundColor: "#28a745"
-  },
-  almostfull: {
-    backgroundColor: "#ff9800"
-  },
-  closed: {
-    backgroundColor: "#ff4444"
-  },
-
-  statusText: {
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "bold"
-  },
-  enrollButton: {
-    backgroundColor: "#0057FF",
-    paddingVertical: 8,
-    paddingHorizontal: 15,
-    borderRadius: 5
-  },
-  enrollText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 14
   },
 });
 
