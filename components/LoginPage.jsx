@@ -48,8 +48,8 @@ const LoginPage = ({ navigation }) => {
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.googleButton}>
-        <Text style={styles.googleText}>Continue with Google</Text>
+      <TouchableOpacity style={styles.guestButton} onPress={() => navigation.navigate("Home")}>
+        <Text style={styles.guestText}>Continue as Guest</Text>
       </TouchableOpacity>
 
       <Text style={styles.signupText}>
@@ -68,13 +68,25 @@ const LoginPage = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
-  logo: { width: 80, height: 80, marginBottom: 10 },
-  title: { fontSize: 22, fontWeight: "bold" },
-  subtitle: { color: "#888", marginBottom: 20, marginTop: 5},
+  logo: {
+    width: 80,
+    height: 80,
+    marginBottom: 10
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "bold"
+  },
+  subtitle: {
+    color: "#888",
+    marginBottom: 20,
+    marginTop: 5
+  },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -84,13 +96,19 @@ const styles = StyleSheet.create({
     width: "90%",
     marginVertical: 5,
   },
-  icon: { marginRight: 10 },
-  input: { flex: 1 },
+  icon: {
+    marginRight: 10,
+    marginLeft: 10
+  },
+  input: {
+    flex: 1,
+    fontWeight: 500
+  },
   forgotPassword: {
     color: "#007bff",
     alignSelf: "flex-end",
     marginLeft: 200,
-    marginBottom: 5,
+    marginBottom: 12,
     marginTop: 7
   },
   loginButton: {
@@ -99,21 +117,35 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: "90%",
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: 5
   },
-  loginText: { color: "#fff", fontWeight: "bold" },
-  googleButton: {
+  loginText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 15
+  },
+  guestButton: {
+    backgroundColor: "#888888",
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: "#888888",
     padding: 15,
     borderRadius: 8,
     width: "90%",
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: 5
   },
-  googleText: { fontWeight: "bold" },
-  signupText: { marginTop: 20 },
-  signupLink: { color: "#007bff", fontWeight: "bold" },
+  guestText: {
+    fontWeight: "bold",
+    color: "white",
+    fontSize: 15
+  },
+  signupText: {
+    marginTop: 20
+  },
+  signupLink: {
+    color: "#007bff",
+    fontWeight: "bold"
+  },
 });
 
 export default LoginPage;

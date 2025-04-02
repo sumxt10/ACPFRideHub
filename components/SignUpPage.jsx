@@ -35,11 +35,6 @@ const SignUpPage = ({ navigation }) => {
       </View>
 
       <View style={styles.inputContainer}>
-      <MaterialIcons name="credit-card" size={20} color="#666" style={styles.icon} />
-        <TextInput placeholder="Aadhar Card Number" style={styles.input} />
-      </View>
-
-      <View style={styles.inputContainer}>
         <MaterialIcons name="lock-outline" size={20} color="#666" style={styles.icon} />
         <TextInput placeholder="Password" style={styles.input} secureTextEntry />
       </View>
@@ -85,9 +80,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  logo: { width: 80, height: 80, marginBottom: 10 },
-  title: { fontSize: 22, fontWeight: "bold" },
-  subtitle: { color: "#888", marginBottom: 20, marginTop: 5},
+  logo: {
+    width: 80,
+    height: 80,
+    marginBottom: 10
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "bold"
+  },
+  subtitle: {
+    color: "#888",
+    marginBottom: 20,
+    marginTop: 5
+  },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -95,17 +101,28 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     width: "90%",
-    marginVertical: 5,
+    marginVertical: 5
   },
-  icon: { marginRight: 10 },
-  input: { flex: 1 },
+  icon: {
+    marginRight: 10,
+    marginLeft: 7
+  },
+  input: {
+    flex: 1,
+    fontWeight: 500
+  },
   termsContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 10,
   },
-  termsText: { marginLeft: 5 },
-  termsLink: { color: "#007bff", fontWeight: "bold" },
+  termsText: {
+    marginLeft: 5
+  },
+  termsLink: {
+    color: "#007bff",
+    fontWeight: "bold"
+  },
   signupButton: {
     backgroundColor: "#0057FF",
     padding: 15,
@@ -114,9 +131,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 10,
   },
-  signupText: { color: "#fff", fontWeight: "bold" },
-  loginText: { marginTop: 20 },
-  loginLink: { color: "#007bff", fontWeight: "bold" },
+  signupText: {
+    color: "#fff",
+    fontWeight: "bold"
+  },
+  loginText: {
+    marginTop: 20
+  },
+  loginLink: {
+    color: "#007bff",
+    fontWeight: "bold"
+  },
 });
 
 export default SignUpPage;

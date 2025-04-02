@@ -7,6 +7,8 @@ import HomePage from "./components/HomePage";
 import UpcomingRides from "./components/UpcomingRides";
 import RideDetails from "./components/RideDetails";
 import RideEnrollment from "./components/RideEnrollment";
+import SuccessfulRegistration from "./components/SuccessfulRegistration";
+import Shop from "./components/Shop";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +22,8 @@ export default function App() {
         <Stack.Screen name="UpcomingRides" component={UpcomingRides} />
         <Stack.Screen name="RideDetails" component={RideDetails} />
         <Stack.Screen name="RideEnrollment" component={RideEnrollment} />
+        <Stack.Screen name="SuccessfulRegistration" component={SuccessfulRegistration} />
+        <Stack.Screen name="Shop" component={Shop} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -33,12 +33,7 @@ const RideDetails = ({ navigation, route }) => {
       </View>
 
       {/* Ride Image */}
-      <Image source={ride.image} style={styles.rideImage} />
-
-      {/* Ride Type Badge */}
-      <View style={styles.badge}>
-        <Text style={styles.badgeText}>{ride.title}</Text>
-      </View>
+      {/* <Image source={ride.image} style={styles.rideImage} /> */}
 
       {/* Ride Info */}
       <View style={styles.rideInfoContainer}>
@@ -46,18 +41,18 @@ const RideDetails = ({ navigation, route }) => {
         <View style={styles.dateTime}>
           <MaterialIcons name="event" size={18} color="#666" />
           <Text style={styles.dateText}>
-            {ride.day}, {ride.date} • 7:00 AM
+            {ride.date}, {ride.day} • {ride.time}
           </Text>
         </View>
 
         {/* Start & End Locations */}
         <View style={styles.locationContainer}>
           <MaterialIcons name="place" size={20} color="green" />
-          <Text style={styles.locationText}>Start: {ride.location}</Text>
+          <Text style={styles.locationText}>Start : {ride.location}</Text>
         </View>
         <View style={styles.locationContainer}>
           <MaterialIcons name="flag" size={20} color="red" />
-          <Text style={styles.locationText}>End: TBD</Text>
+          <Text style={styles.locationText}>End : TBD</Text>
         </View>
 
         {/* Distance, Duration, Difficulty */}
@@ -80,72 +75,16 @@ const RideDetails = ({ navigation, route }) => {
         </View>
 
         {/* Spots Left & Register Button */}
-        <View style={styles.spotsContainer}>
-          <Text style={styles.spotsText}>
-            <MaterialIcons name="people" size={18} color="#0057FF" /> 12 spots
-            left
-          </Text>
+        <View style={styles.rideDetailsContainer}>
+          <View style={styles.spotsContainer}>
+            <MaterialIcons name="people" size={20} color="#0057FF" style={{marginRight: 5, paddingTop: 2}} /> 
+            <Text style={styles.spotsText}>12 spots left</Text>
+          </View>
           <Text style={styles.totalRidersText}>Total: 50 riders</Text>
         </View>
         <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate("RideEnrollment", { ride })}>
           <Text style={styles.registerText}>Enroll Now</Text>
         </TouchableOpacity>
-
-        {/* Route Map Placeholder */}
-        <Text style={styles.sectionTitle}>Route Map</Text>
-        <View style={styles.mapPlaceholder} />
-
-        {/* Ride Highlights */}
-        <Text style={styles.sectionTitle}>Ride Highlights</Text>
-        <View style={styles.highlightsContainer}>
-          <View style={styles.highlightBox}>
-            <MaterialIcons name="wb-sunny" size={22} color="#000" />
-            <Text style={styles.highlightText}>Sunny, 72°F</Text>
-          </View>
-          <View style={styles.highlightBox}>
-            <MaterialIcons name="terrain" size={22} color="#000" />
-            <Text style={styles.highlightText}>Coastal flat</Text>
-          </View>
-          <View style={styles.highlightBox}>
-            <MaterialIcons name="local-drink" size={22} color="#000" />
-            <Text style={styles.highlightText}>3 water stops</Text>
-          </View>
-          <View style={styles.highlightBox}>
-            <MaterialIcons name="verified" size={22} color="#000" />
-            <Text style={styles.highlightText}>Full support</Text>
-          </View>
-        </View>
-
-        {/* Participants */}
-        <View style={styles.participantsHeader}>
-          <Text style={styles.sectionTitle}>Participants (24)</Text>
-          <TouchableOpacity>
-            <Text style={styles.seeAllText}>See all</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.participantsContainer}>
-          <Image
-            source={require("../assets/user1.png")}
-            style={styles.participantImage}
-          />
-          <Image
-            source={require("../assets/user2.png")}
-            style={styles.participantImage}
-          />
-          <Image
-            source={require("../assets/user3.png")}
-            style={styles.participantImage}
-          />
-          <Image
-            source={require("../assets/user4.png")}
-            style={styles.participantImage}
-          />
-          <Image
-            source={require("../assets/user5.png")}
-            style={styles.participantImage}
-          />
-          <Text style={styles.moreParticipants}>+18</Text>
-        </View>
 
         {/* Ride Leaders */}
         <Text style={styles.rideLeadersTitle}>Ride Leaders</Text>
@@ -195,7 +134,12 @@ const RideDetails = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", paddingTop: 30, paddingBottom: 50 },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    paddingTop: 30,
+    paddingBottom: 50
+  },
 
   header: {
     flexDirection: "row",
@@ -203,9 +147,17 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
   },
-  headerTitle: { fontSize: 20, fontWeight: "bold", color: "#000" },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#000"
+  },
 
-  rideImage: { width: "100%", height: 220, resizeMode: "cover" },
+  rideImage: {
+    width: "100%",
+    height: 220,
+    resizeMode: "cover"
+  },
   badge: {
     position: "absolute",
     top: 70,
@@ -221,19 +173,40 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     color: "#333",
   },
-  badgeText: { color: "#fff", fontSize: 14, fontWeight: "600" },
+  badgeText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "600"
+  },
 
-  rideInfoContainer: { padding: 15 },
-  rideTitle: { fontSize: 22, fontWeight: "bold" },
-  dateTime: { flexDirection: "row", alignItems: "center", marginVertical: 5 },
-  dateText: { fontSize: 15, color: "#666", marginLeft: 5 },
+  rideInfoContainer: {
+    padding: 15
+  },
+  rideTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 10
+  },
+  dateTime: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  dateText: {
+    fontSize: 15,
+    color: "#666",
+    marginLeft: 10
+   },
 
   locationContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 8,
   },
-  locationText: { marginLeft: 8, fontSize: 15, color: "#444" },
+  locationText: {
+    marginLeft: 8,
+    fontSize: 15,
+    color: "#444"
+  },
 
   rideStats: {
     flexDirection: "row",
@@ -242,17 +215,31 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
-  statBox: { alignItems: "center" },
-  statValue: { fontSize: 18, fontWeight: "bold", marginVertical: 5 },
-  statLabel: { fontSize: 12, color: "#666" },
+  statBox: {
+    alignItems: "center"
+  },
+  statValue: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginVertical: 5
+  },
+  statLabel: {
+    fontSize: 12,
+    color: "#666"
+  },
 
   registerButton: {
     backgroundColor: "#0057FF",
     padding: 12,
+    marginVertical: 10,
     borderRadius: 6,
     alignItems: "center",
   },
-  registerText: { color: "#fff", fontWeight: "bold", fontSize: 16 },
+  registerText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16
+  },
 
   mapPlaceholder: {
     width: "100%",
@@ -276,10 +263,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8f8f8",
     borderRadius: 6,
   },
-  highlightText: { marginLeft: 10, fontSize: 14, fontWeight: "500" },
+  highlightText: {
+    marginLeft: 10,
+    fontSize: 14,
+    fontWeight: "500"
+  },
 
-  errorText: { textAlign: "center", fontSize: 18, marginTop: 20, color: "red" },
-  spotsContainer: {
+  errorText: {
+    textAlign: "center",
+    fontSize: 18,
+    marginTop: 20,
+    color: "red"
+  },
+  rideDetailsContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -288,7 +284,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#f0f4ff",
     borderRadius: 6,
   },
+  spotsContainer: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
   spotsText: {
+    justifyContent: "center",
+    alignItems: "center",
     fontSize: 16,
     fontWeight: "bold",
     color: "#0057FF",
@@ -333,7 +335,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: "#333",
-    marginBottom: 8,
+    marginVertical: 8,
   },
   rideLeaderContainer: {
     flexDirection: "row",
@@ -366,7 +368,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     justifyContent: "space-between",
-    marginTop: 10,
+    marginVertical: 10,
   },
   rulesTitle: {
     fontSize: 15,

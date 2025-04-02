@@ -47,19 +47,21 @@ const RideEnrollment = ({ navigation, route }) => {
       </View>
 
       {/* Ride Details */}
-      <Image source={ride.image} style={styles.rideImage} />
-
       <View style={styles.rideInfo}>
         <Text style={styles.rideTitle}>{ride.title}</Text>
-        <View style={styles.dateTime}>
+        <View style={styles.detailsContainer}>
           <MaterialIcons name="event" size={18} color="#666" />
-          <Text style={styles.dateText}>
-            {ride.day}, {ride.date} • 6:00 AM
+          <Text style={styles.details}>
+            {ride.date}   ({ride.day})
           </Text>
         </View>
-        <View style={styles.locationContainer}>
+        <View style={styles.detailsContainer}>
+          <MaterialIcons name="schedule" size={18} color="#666" />
+          <Text style={styles.details}>{ride.time}</Text>
+        </View>
+        <View style={styles.detailsContainer}>
           <MaterialIcons name="place" size={20} color="#666" />
-          <Text style={styles.locationText}>{ride.location}</Text>
+          <Text style={styles.details}>{ride.location}</Text>
         </View>
         <View style={styles.badges}>
           <View style={styles.badge}>
@@ -120,19 +122,17 @@ const RideEnrollment = ({ navigation, route }) => {
           onChangeText={setEmergencyContact}
         />
 
-        <View style={styles.medicalContainer}>
-          <Text style={styles.label}>
-            Medical Conditions{" "}
-            <Text style={styles.optionalText}>(Optional)</Text>
-          </Text>
-          <TextInput
-            style={styles.medicalInput}
-            placeholder="Please mention any medical conditions..."
-            value={medicalConditions}
-            onChangeText={setMedicalConditions}
-            multiline
-          />
-        </View>
+        <Text style={styles.label}>
+          Medical Conditions{" "}
+          <Text style={styles.optionalText}>(Optional)</Text>
+        </Text>
+        <TextInput
+          style={styles.medicalInput}
+          placeholder="Please mention any medical conditions..."
+          value={medicalConditions}
+          onChangeText={setMedicalConditions}
+          multiline
+        />
 
         <Text style={styles.label}>
           Cycling Experience Level <Text style={styles.required}>*</Text>
@@ -143,18 +143,7 @@ const RideEnrollment = ({ navigation, route }) => {
           value={experienceLevel}
           onChangeText={setExperienceLevel}
         />
-
-        {/* Aadhar Upload */}
-        <Text style={styles.label}>
-          Aadhar Card <Text style={styles.required}>*</Text>
-        </Text>
-        <TouchableOpacity style={styles.uploadBox}>
-          <MaterialIcons name="cloud-upload" size={30} color="#888" />
-          <Text style={styles.uploadText}>
-            Click to upload or drag and drop
-          </Text>
-          <Text style={styles.uploadSubText}>Maximum file size: 5MB</Text>
-        </TouchableOpacity>
+        
       </View>
 
       {/* Registration Fee */}
@@ -162,7 +151,11 @@ const RideEnrollment = ({ navigation, route }) => {
         <Text style={styles.feeAmount}>₹1,499</Text>
         <Text style={styles.feeLabel}>Registration Fee</Text>
         <View style={styles.paymentButtons}>
-          <TouchableOpacity style={styles.paymentButton}>
+          <TouchableOpacity style={styles.paymentButton} onPress={() => {
+            console.log(fullName);
+            console.log(age);
+            console.log(contactNumber);
+          }}>
             <Text style={styles.paymentText}>UPI</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.paymentButton}>
@@ -179,14 +172,15 @@ const RideEnrollment = ({ navigation, route }) => {
           color="#0057FF"
         />
         <Text style={styles.termsText}>
-          I agree to the{" "}
-          <Text style={styles.termsLink}>Terms & Conditions</Text> and confirm
+          I agree to the
+          <Text style={styles.termsLink}> Terms & Conditions </Text>
+          and confirm
           that the information provided is accurate.
         </Text>
       </View>
 
       {/* Register Button */}
-      <TouchableOpacity style={styles.registerButton} disabled={!checked}>
+      <TouchableOpacity style={styles.registerButton} onPress={()=> {navigation.navigate("SuccessfulRegistration", { ride })}}>
         <Text style={styles.registerText}>Register Now</Text>
       </TouchableOpacity>
     </ScrollView>
@@ -194,7 +188,11 @@ const RideEnrollment = ({ navigation, route }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", paddingTop: 40 },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    paddingTop: 40
+  },
 
   header: {
     flexDirection: "row",
@@ -203,23 +201,58 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
   },
-  headerTitle: { fontSize: 20, fontWeight: "bold", color: "#000" },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#000"
+  },
 
-  rideImage: { width: "100%", height: 230, resizeMode: "cover" },
-  rideInfo: { paddingHorizontal: 20, paddingVertical: 15 },
-  rideTitle: { fontSize: 22, fontWeight: "bold" },
+  rideImage: {
+    width: "100%",
+    height: 230,
+    resizeMode: "cover"
+  },
+  rideInfo: {
+    paddingHorizontal: 20,
+    paddingVertical: 15
+  },
+  rideTitle: {
+    fontSize: 22,
+    fontWeight: "bold"
+  },
 
-  dateTime: { flexDirection: "row", alignItems: "center", marginVertical: 5 },
-  dateText: { fontSize: 15, color: "#666", marginLeft: 5 },
+  detailsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 6
+  },
+  details: {
+    marginLeft: 8,
+    fontSize: 15,
+    color: "#444"
+  },
+  dateText: {
+    fontSize: 15,
+    color: "#666",
+    marginLeft: 8
+  },
 
   locationContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 5,
   },
-  locationText: { marginLeft: 8, fontSize: 15, color: "#444" },
+  locationText: {
+    marginLeft: 8,
+    fontSize: 15,
+    color: "#444"
+  },
 
-  badges: { flexDirection: "row", marginTop: 10, gap: 10 },
+  badges: {
+    flexDirection: "row",
+    marginTop: 10,
+    gap: 10
+  },
   badge: {
     flexDirection: "row",
     alignItems: "center",
@@ -227,12 +260,29 @@ const styles = StyleSheet.create({
     backgroundColor: "#0057FF",
     borderRadius: 5,
   },
-  badgeText: { color: "#fff", marginLeft: 5, fontSize: 14 },
+  badgeText: {
+    color: "#fff",
+    marginLeft: 5,
+    fontSize: 14
+  },
 
-  formContainer: { paddingHorizontal: 20 },
-  sectionTitle: { fontSize: 18, fontWeight: "bold", marginBottom: 10 },
-  label: { fontSize: 16, fontWeight: "500", color: "#333", marginBottom: 5 },
-  required: { color: "red" },
+  formContainer: {
+    paddingHorizontal: 20
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#333",
+    marginBottom: 5
+  },
+  required: {
+    color: "red"
+  },
 
   input: {
     backgroundColor: "#f9f9f9",
@@ -259,6 +309,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     borderRadius: 10,
     marginHorizontal: 20,
+    marginTop: 15,
     marginBottom: 20,
     elevation: 2, // For subtle shadow effect
   },
@@ -320,7 +371,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 8,
     marginHorizontal: 20,
-    marginBottom: 30,
+    marginBottom: 20,
     elevation: 2,
   },
   registerText: {
@@ -328,13 +379,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  medicalContainer: {
-    marginBottom: 20,
-  },
   medicalInput: {
     backgroundColor: "#f9f9f9",
     paddingVertical: 12,
     paddingHorizontal: 15,
+    marginBottom: 10,
     borderRadius: 8,
     borderWidth: 1,
     borderColor: "#ccc",

@@ -6,10 +6,55 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  ImageBackground,
 } from "react-native";
 import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
+import EventCard from "./EventCard";
 
 const HomePage = ({ navigation }) => {
+  const rides = [
+    {
+      day: "SAT",
+      date: "Mar 15, 2025",
+      time: "8:00 AM",
+      title: "Weekend City Explorer",
+      location: "Central Park, New York",
+      distance: "15 km",
+      duration: "1.5 hrs",
+      status: "Available",
+    },
+    {
+      day: "SUN",
+      date: "Mar 16,2025",
+      time: "7:00 AM",
+      title: "Weekend Mountain Trail",
+      location: "Pune Hills",
+      distance: "35 km",
+      duration: "3 hrs",
+      status: "Almost Full",
+    },
+    {
+      day: "THU",
+      date: "Mar 20, 2025",
+      time: "7:30 AM",
+      title: "Charity Ride for Education",
+      location: "Hudson River Park",
+      distance: "25 km",
+      duration: "2 hrs",
+      status: "Available",
+    },
+    {
+      day: "SAT",
+      date: "Mar 22, 2025",
+      time: "7:00 AM",
+      title: "Sunset Beach Ride",
+      location: "Rockaway Beach",
+      distance: "20 km",
+      duration: "2 hrs",
+      status: "Closed",
+    },
+  ];
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -29,7 +74,7 @@ const HomePage = ({ navigation }) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Hero Section */}
         <View style={styles.heroContainer}>
-          <Image
+          <ImageBackground
             source={require("../assets/head.png")}
             style={styles.heroImage}
           />
@@ -50,10 +95,6 @@ const HomePage = ({ navigation }) => {
           <TouchableOpacity style={styles.actionButton} onPress={() => navigation.navigate("UpcomingRides")}>
             <FontAwesome5 name="bicycle" size={24} color="#007bff" />
             <Text style={styles.actionText}>Upcoming Rides</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton}>
-            <MaterialIcons name="phone-in-talk" size={24} color="#ff4444" />
-            <Text style={styles.actionText}>Emergency Call</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton}>
             <MaterialIcons
@@ -78,49 +119,19 @@ const HomePage = ({ navigation }) => {
           showsHorizontalScrollIndicator={false}
           style={styles.eventsScroll}
         >
-          <View style={styles.eventCard}>
-            <Image
-              source={require("../assets/upc1.png")}
-              style={styles.eventImage}
-            />
-            <Text style={styles.eventTitle}>Weekend Mountain Trail</Text>
+          <EventCard
+            title={"Weekend Mountain Trail"}
+            date={"Sat, Feb 24"}
+            time={"7:00 AM"}
+            location={"Pune Hills"}
+          />
 
-            <View style={styles.eventDetailsContainer}>
-              <MaterialIcons name="event" size={16} color="#666" />
-              <Text style={styles.eventDetails}>Sat, Feb 24 • 7:00 AM</Text>
-            </View>
-
-            <View style={styles.eventDetailsContainer}>
-              <MaterialIcons name="location-on" size={16} color="#666" />
-              <Text style={styles.eventDetails}>Pune Hills</Text>
-            </View>
-
-            <TouchableOpacity style={styles.enrollButton} >
-              <Text style={styles.enrollText}>Enroll Now</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View style={styles.eventCard}>
-            <Image
-              source={require("../assets/upc2.png")}
-              style={styles.eventImage}
-            />
-            <Text style={styles.eventTitle}>City Night Ride</Text>
-
-            <View style={styles.eventDetailsContainer}>
-              <MaterialIcons name="event" size={16} color="#666" />
-              <Text style={styles.eventDetails}>Sun, Feb 25 • 6:00 PM</Text>
-            </View>
-
-            <View style={styles.eventDetailsContainer}>
-              <MaterialIcons name="location-on" size={16} color="#666" />
-              <Text style={styles.eventDetails}>City Center</Text>
-            </View>
-
-            <TouchableOpacity style={styles.enrollButton}>
-              <Text style={styles.enrollText}>Enroll Now</Text>
-            </TouchableOpacity>
-          </View>
+          <EventCard
+            title={"City Night Ride"}
+            date={"Sun, Feb 25"}
+            time={"6:00 PM"}
+            location={"City Center"}
+          />
         </ScrollView>
 
         {/* Community Highlights */}
@@ -149,7 +160,7 @@ const HomePage = ({ navigation }) => {
           <MaterialIcons name="event" size={28} color="#666" />
           <Text style={styles.navText}>Events</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity style={styles.navItem} onPress={() => {navigation.navigate("Shop")}}>
           <MaterialIcons name="store" size={28} color="#666" />
           <Text style={styles.navText}>Shop</Text>
         </TouchableOpacity>
@@ -167,37 +178,69 @@ const HomePage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    navItem: {
-        alignItems: "center",
-      },
-      navText: {
-        fontSize: 12,
-        color: "#666",
-        marginTop: 2,
-      },      
-  container: { flex: 1, backgroundColor: "#fff", paddingTop: 30},
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    paddingTop: 25
+  },
+  navItem: {
+      alignItems: "center",
+  },
+  navText: {
+    fontSize: 12,
+    color: "#666",
+    marginTop: 2,
+  },      
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     padding: 15,
   },
-  headerTitle: { fontSize: 18, fontWeight: "bold" },
-  profileIcon: { width: 35, height: 35, borderRadius: 50 },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: "bold"
+  },
+  profileIcon: {
+    width: 35,
+    height: 35,
+    borderRadius: 50
+  },
 
-  heroContainer: { position: "relative" },
-  heroImage: { width: "100%", height: 180 },
-  heroTextContainer: { position: "absolute", bottom: 20, left: 20 },
-  heroTitle: { fontSize: 18, fontWeight: "bold", color: "#fff" },
-  heroSubtitle: { color: "#fff" },
+  heroContainer: {
+    position: "relative"
+  },
+  heroImage: {
+    width: "100%",
+    height: 180
+  },
+  heroTextContainer: {
+    position: "absolute",
+    bottom: 20,
+    left: 20
+  },
+  heroTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#fff"
+  },
+  heroSubtitle: {
+    color: "#fff"
+  },
 
   actionButtons: {
     flexDirection: "row",
     justifyContent: "space-around",
     marginVertical: 20,
   },
-  actionButton: { alignItems: "center" },
-  actionText: { marginTop: 5, fontSize: 12, fontWeight: "bold" },
+  actionButton: {
+    alignItems: "center"
+  },
+  actionText: {
+    marginTop: 5,
+    fontSize: 12,
+    fontWeight: "bold"
+  },
 
   sectionHeader: {
     flexDirection: "row",
@@ -205,29 +248,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingTop: 5
   },
-  sectionTitle: { fontSize: 18, fontWeight: "bold"},
-  communityTitle: { fontSize: 18, fontWeight: "bold", paddingTop:35, paddingLeft: 20},
-  viewAll: { color: "#007bff" },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold"
+  },
+  communityTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    paddingTop: 35,
+    paddingLeft: 20
+  },
+  viewAll: {
+    color: "#007bff"
+  },
 
-  eventsScroll: { paddingHorizontal: 15 },
-  eventCard: {
-    backgroundColor: "#f8f9fa",
-    padding: 10,
-    borderRadius: 10,
-    marginRight: 10,
-    width: 180,
+  eventsScroll: {
+    paddingHorizontal: 15
   },
-  eventImage: { width: "100%", height: 100, borderRadius: 10 },
-  eventTitle: { fontWeight: "bold", marginVertical: 5 },
-  eventDetails: { color: "#666", fontSize: 12 },
-  enrollButton: {
-    backgroundColor: "#0057FF",
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 5,
-    alignItems: "center",
-  },
-  enrollText: { color: "#fff", fontWeight: "bold" },
 
   highlightsContainer: {
     flexDirection: "row",
@@ -241,8 +278,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: "45%",
   },
-  highlightNumber: { fontSize: 16, fontWeight: "bold" },
-  highlightText: { fontSize: 12, color: "#666" },
+  highlightNumber: {
+    fontSize: 16,
+    fontWeight: "bold"
+  },
+  highlightText: {
+    fontSize: 12,
+    color: "#666"
+  },
 
   bottomNav: {
     flexDirection: "row",
