@@ -10,64 +10,46 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 
 const LoginPage = ({ navigation }) => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const submitHandler = async (e) => {
-    console.log(email)
-    console.log(password)
-    e.preventDefault();
-    if(!email || email.length === 0 || !password || password.length === 0) {
-        setError("Email or Password not provided");
-        return;
+  const submitHandler = async () => {
+    if (!email || !password) {
+      console.log("Email or Password not provided");
+      return;
     }
-    
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    
-    let raw = JSON.stringify({
-        "email": email,
-        "password": password
-    });
 
-    let requestOptions = {
+    try {
+      const response = await fetch("http://localhost:5000/api/users/login", {
         method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow"
-    };
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    fetch(`http://localhost:${process.env.PORT}/login`, requestOptions)
-    .then(response => response.json())
-    .then(result => {
-        if(!result.success) {
-          console.log("Error: " + str(result.message))
-          return;
-        }
-        console.log('User Login Successful');
-        navigation.navigate("Home");
-    })
-    .catch(error => {
-        console.error("Error: ", error);
-    });
-  }
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.log("Error: " + String(result.message));
+        return;
+      }
+
+      console.log("User Login Successful");
+      navigation.navigate("Home");
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Image source={require("../assets/logo.png")} style={styles.logo} />
       <Text style={styles.title}>ACPF RideHub</Text>
-      <Text style={styles.subtitle}>Welcome Back !</Text>
+      <Text style={styles.subtitle}>Welcome Back!</Text>
 
       <View style={styles.inputContainer}>
-        <MaterialIcons
-          name="mail-outline"
-          size={20}
-          color="#666"
-          style={styles.icon}
-        />
+        <MaterialIcons name="mail-outline" size={20} color="#666" style={styles.icon} />
         <TextInput
-          placeholder="Email or Phone Number"
+          placeholder="Email"
           style={styles.input}
           value={email}
           onChangeText={setEmail}
@@ -75,12 +57,7 @@ const LoginPage = ({ navigation }) => {
       </View>
 
       <View style={styles.inputContainer}>
-        <MaterialIcons
-          name="lock-outline"
-          size={20}
-          color="#666"
-          style={styles.icon}
-        />
+        <MaterialIcons name="lock-outline" size={20} color="#666" style={styles.icon} />
         <TextInput
           placeholder="Password"
           style={styles.input}
@@ -94,7 +71,7 @@ const LoginPage = ({ navigation }) => {
         <Text style={styles.forgotPassword}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginButton} onPress={() => submitHandler()}>
+      <TouchableOpacity style={styles.loginButton} onPress={submitHandler}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
@@ -103,11 +80,8 @@ const LoginPage = ({ navigation }) => {
       </TouchableOpacity>
 
       <Text style={styles.signupText}>
-        Don’t have an account?{" "}
-        <Text
-          style={styles.signupLink}
-          onPress={() => navigation.navigate("SignUp")}
-        >
+        Don't have an account?{" "}
+        <Text style={styles.signupLink} onPress={() => navigation.navigate("SignUp")}>
           Sign Up
         </Text>
       </Text>

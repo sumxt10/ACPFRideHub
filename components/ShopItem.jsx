@@ -2,15 +2,17 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
 const ShopItem = ({ item, onViewDetailsButtonPressed }) => {
-  item = item.item;
   return (
     <View style={styles.cardContainer}>
       <View style={styles.imageContainer}>
-        <Image source={item.image} style={styles.itemImage} />
+        <Image source={{ uri: item.image }} style={styles.itemImage} />
       </View>
-      <Text style={styles.itemName}>{item.name}</Text>
+      <Text style={styles.itemName}>{item.item_name}</Text>
       <Text style={styles.itemPrice}>₹ {item.price}</Text>
-      <TouchableOpacity style={styles.viewDetailsButton} onPress={() => {onViewDetailsButtonPressed(item)}}>
+      <TouchableOpacity 
+        style={styles.viewDetailsButton} 
+        onPress={() => onViewDetailsButtonPressed(item)}
+      >
         <Text style={styles.viewDetailsText}>View Details</Text>
       </TouchableOpacity>
     </View>
