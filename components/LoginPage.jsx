@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Alert
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -15,12 +16,12 @@ const LoginPage = ({ navigation }) => {
 
   const submitHandler = async () => {
     if (!email || !password) {
-      console.log("Email or Password not provided");
+      Alert.alert("Error", "Email or Password not provided");
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/login", {
+      const response = await fetch("http://192.168.131.68:5000/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -29,13 +30,14 @@ const LoginPage = ({ navigation }) => {
       const result = await response.json();
 
       if (!response.ok) {
-        console.log("Error: " + String(result.message));
+        Alert.alert("Login Failed", result.message || "Invalid credentials");
         return;
       }
 
-      console.log("User Login Successful");
+      Alert.alert("Success", "User Login Successful");
       navigation.navigate("Home");
     } catch (error) {
+      Alert.alert("Error", "Something went wrong. Please try again later.");
       console.error("Error: ", error);
     }
   };
