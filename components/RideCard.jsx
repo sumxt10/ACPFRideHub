@@ -4,23 +4,28 @@ import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 
 const RideCard = ({ navigation, ride, viewDetails, enroll }) => {
   ride = ride.item;
+  const datetime = new Date(ride.date_time);
 
   return (
     <View style={styles.cardContainer}>
       <View style={styles.titleContainer}>
-        <Text style={styles.rideTitle}>{ride.title}</Text>
+        <Text style={styles.rideTitle}>{ride.ride_name}</Text>
       </View>
       <View style={styles.detailsContainer}>
         <MaterialIcons name="event" size={20} color="#666"  style={styles.icon} />
-        <Text style={styles.details}>{ride.date}</Text>
+        <Text style={styles.details}>{datetime.getDay().toString().padStart(2,'0')+"-"+datetime.getMonth().toString().padStart(1,'0')+1+"-"+datetime.getFullYear()}</Text>
       </View>
       <View style={styles.detailsContainer}>
         <MaterialIcons name="schedule" size={20} color="#666"  style={styles.icon} />
-        <Text style={styles.details}>{ride.time}</Text>
+        <Text style={styles.details}>{datetime.getHours().toString().padStart(2,'0')+":"+datetime.getMinutes().toString().padStart(2,'0')}</Text>
       </View>
       <View style={styles.detailsContainer}>
         <MaterialIcons name="place" size={20} color="#666"  style={styles.icon} />
-        <Text style={styles.details}>{ride.location}</Text>
+        <Text style={styles.details}>Start: {ride.start_location}</Text>
+      </View>
+      <View style={styles.detailsContainer}>
+        <MaterialIcons name="place" size={20} color="#666"  style={styles.icon} />
+        <Text style={styles.details}>End: {ride.end_location}</Text>
       </View>
       <View style={styles.detailsContainer}>
         <Image source={require("../assets/distance.png")} style={styles.icon}></Image>

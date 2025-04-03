@@ -117,7 +117,7 @@ const HomePage = ({ navigation }) => {
         {/* Upcoming Events */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Upcoming Events</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("EmergencyCall")}>
             <Text style={styles.viewAll}>View All</Text>
           </TouchableOpacity>
         </View>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -12,7 +12,33 @@ import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import RideCard from "./RideCard";
 
 const UpcomingRides = ({ navigation }) => {
-  const rides = [
+  
+  const myHeaders = new Headers();
+  const [rides, setRides] = useState([]);
+  myHeaders.append("Content-Type", "application/json");
+  
+  let raw = JSON.stringify({
+  });
+
+  let requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+  };
+  fetch('http://192.168.3.244:5000/rides', requestOptions)
+  .then(response => response.json())
+  .then(result => {
+    if(!result.success) {
+      console.log("Error : " + result.message);
+      return;
+    }
+    setRides(result.message);
+  })
+  .catch(error => {
+      console.error("Error: ", error);
+  });
+
+  const rides1 = [
     {
       id: 1,
       day: "SAT",
@@ -96,7 +122,7 @@ const UpcomingRides = ({ navigation }) => {
             enroll={onEnrollButtonPress} 
           />
         }
-        keyExtractor={(ride) => ride.id.toString()}
+        keyExtractor={(ride) => ride._id}
         numColumns={1}
         contentContainerStyle={styles.ridesList}
       />
