@@ -9,6 +9,7 @@ import {
   Alert
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import Constants from "expo-constants";
 
 const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ const LoginPage = ({ navigation }) => {
     }
 
     try {
-      const response = await fetch("http://192.168.131.68:5000/user/login", {
+      const response = await fetch(`http://${Constants.expoConfig?.hostUri?.split(":")[0]}:5000/user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

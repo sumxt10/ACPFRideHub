@@ -11,6 +11,7 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import CheckBox from "expo-checkbox";
 import axios from "axios";
+import Constants from "expo-constants";
 
 const SignUpPage = ({ navigation }) => {
   const [isChecked, setIsChecked] = useState(false);
@@ -39,7 +40,7 @@ const SignUpPage = ({ navigation }) => {
 
     try {
       const response = await axios.post(
-        "http://192.168.131.68:5000/user/signup",
+        `http://${Constants.expoConfig?.hostUri?.split(":")[0]}:5000/user/signup`,
         {
           name: formData.name,
           email: formData.email,

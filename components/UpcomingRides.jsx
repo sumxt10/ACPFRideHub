@@ -10,29 +10,27 @@ import {
 } from "react-native";
 import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import RideCard from "./RideCard";
+import Constants from "expo-constants";
 
 const UpcomingRides = ({ navigation }) => {
   
-  const myHeaders = new Headers();
   const [rides, setRides] = useState([]);
-  myHeaders.append("Content-Type", "application/json");
-  
-  let raw = JSON.stringify({
-  });
 
-  let requestOptions = {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  const requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow"
   };
-  fetch('http://192.168.3.244:5000/rides', requestOptions)
+  fetch(`http://${Constants.expoConfig?.hostUri?.split(":")[0]}:5000/rides`, requestOptions)
   .then(response => response.json())
   .then(result => {
     if(!result.success) {
       console.log("Error : " + result.message);
       return;
     }
-    setRides(result.message);
+    setRides(result.data);
   })
   .catch(error => {
       console.error("Error: ", error);
@@ -117,7 +115,7 @@ const UpcomingRides = ({ navigation }) => {
         data={rides}
         renderItem={(ride) => 
           <RideCard 
-            ride={ride}
+            ride={ride.item}
             viewDetails={onViewDetailsButtonPress}
             enroll={onEnrollButtonPress} 
           />
@@ -152,7 +150,8 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: "row",
     backgroundColor: "#f2f2f2",
-    padding: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 12,
     marginHorizontal: 15,
     borderRadius: 10,
     alignItems: "center",
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
 
   ridesList: {
     paddingHorizontal: 15,
-    marginTop: 10
+    marginTop: 5
   },
 });
 

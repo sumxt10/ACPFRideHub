@@ -30,6 +30,18 @@ const RideEnrollment = ({ navigation, route }) => {
   const [medicalConditions, setMedicalConditions] = useState("");
   const [checked, setChecked] = useState(false);
 
+  const datetime = new Date(ride.date_time);
+
+  const date = datetime.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  });
+
+  const time = (datetime.getHours() > 12 ? datetime.getHours() - 12 : datetime.getHours()).toString().padStart(2, '0')
+   + ":" + datetime.getMinutes().toString().padStart(2, '0')
+   + " " + (datetime.getHours() >= 12 ? "PM" : "AM");
+
   return (
     <ScrollView
       style={styles.container}
@@ -48,25 +60,29 @@ const RideEnrollment = ({ navigation, route }) => {
 
       {/* Ride Details */}
       <View style={styles.rideInfo}>
-        <Text style={styles.rideTitle}>{ride.title}</Text>
+        <Text style={styles.rideTitle}>{ride.ride_name}</Text>
         <View style={styles.detailsContainer}>
           <MaterialIcons name="event" size={18} color="#666" />
           <Text style={styles.details}>
-            {ride.date}   ({ride.day})
+            {date}  ({datetime.toLocaleDateString('en-US', { weekday: 'short' })})
           </Text>
         </View>
         <View style={styles.detailsContainer}>
           <MaterialIcons name="schedule" size={18} color="#666" />
-          <Text style={styles.details}>{ride.time}</Text>
+          <Text style={styles.details}>{time}</Text>
         </View>
         <View style={styles.detailsContainer}>
-          <MaterialIcons name="place" size={20} color="#666" />
-          <Text style={styles.details}>{ride.location}</Text>
+          <MaterialIcons name="place" size={18} color="green" />
+          <Text style={styles.details}>Start : {ride.start_location}</Text>
+        </View>
+        <View style={styles.detailsContainer}>
+          <MaterialIcons name="place" size={18} color="red" />
+          <Text style={styles.details}>End : {ride.end_location}</Text>
         </View>
         <View style={styles.badges}>
           <View style={styles.badge}>
             <FontAwesome5 name="bicycle" size={14} color="#fff" />
-            <Text style={styles.badgeText}>{ride.distance}</Text>
+            <Text style={styles.badgeText}>{ride.distance} km</Text>
           </View>
           <View style={[styles.badge, { backgroundColor: "#FF9800" }]}>
             <MaterialIcons name="bar-chart" size={14} color="#fff" />
@@ -181,6 +197,9 @@ const RideEnrollment = ({ navigation, route }) => {
 
       {/* Register Button */}
       <TouchableOpacity style={styles.registerButton} onPress={()=> {navigation.navigate("SuccessfulRegistration", { ride })}}>
+        <Text style={styles.registerText}>Register Now</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.registerButton} onPress={()=> {navigation.navigate("PaymentConfirmation", { ride })}}>
         <Text style={styles.registerText}>Register Now</Text>
       </TouchableOpacity>
     </ScrollView>

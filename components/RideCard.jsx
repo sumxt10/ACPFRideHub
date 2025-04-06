@@ -2,9 +2,16 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 
-const RideCard = ({ navigation, ride, viewDetails, enroll }) => {
-  ride = ride.item;
+const RideCard = ({ ride, viewDetails, enroll }) => {
   const datetime = new Date(ride.date_time);
+
+  const date = datetime.getDate().toString().padStart(2,'0')
+  + "-" + (datetime.getMonth() + 1).toString().padStart(2,'0')
+  + "-" + datetime.getFullYear();
+
+  const time = (datetime.getHours() > 12 ? datetime.getHours() - 12 : datetime.getHours()).toString().padStart(2, '0')
+   + ":" + datetime.getMinutes().toString().padStart(2, '0')
+   + " " + (datetime.getHours() >= 12 ? "PM" : "AM");
 
   return (
     <View style={styles.cardContainer}>
@@ -12,24 +19,24 @@ const RideCard = ({ navigation, ride, viewDetails, enroll }) => {
         <Text style={styles.rideTitle}>{ride.ride_name}</Text>
       </View>
       <View style={styles.detailsContainer}>
-        <MaterialIcons name="event" size={20} color="#666"  style={styles.icon} />
-        <Text style={styles.details}>{datetime.getDay().toString().padStart(2,'0')+"-"+datetime.getMonth().toString().padStart(1,'0')+1+"-"+datetime.getFullYear()}</Text>
+        <MaterialIcons name="event" size={20} color="black"  style={styles.icon} />
+        <Text style={styles.details}>{date}</Text>
       </View>
       <View style={styles.detailsContainer}>
-        <MaterialIcons name="schedule" size={20} color="#666"  style={styles.icon} />
-        <Text style={styles.details}>{datetime.getHours().toString().padStart(2,'0')+":"+datetime.getMinutes().toString().padStart(2,'0')}</Text>
+        <MaterialIcons name="schedule" size={20} color="lack"  style={styles.icon} />
+        <Text style={styles.details}>{time}</Text>
       </View>
       <View style={styles.detailsContainer}>
-        <MaterialIcons name="place" size={20} color="#666"  style={styles.icon} />
-        <Text style={styles.details}>Start: {ride.start_location}</Text>
+        <MaterialIcons name="place" size={20} color="green"  style={styles.icon} />
+        <Text style={styles.details}>Start : {ride.start_location}</Text>
       </View>
       <View style={styles.detailsContainer}>
-        <MaterialIcons name="place" size={20} color="#666"  style={styles.icon} />
-        <Text style={styles.details}>End: {ride.end_location}</Text>
+        <MaterialIcons name="place" size={20} color="red"  style={styles.icon} />
+        <Text style={styles.details}>End : {ride.end_location}</Text>
       </View>
       <View style={styles.detailsContainer}>
         <Image source={require("../assets/distance.png")} style={styles.icon}></Image>
-        <Text style={styles.details}>{ride.distance}</Text>
+        <Text style={styles.details}>{ride.distance} km</Text>
       </View>
       <TouchableOpacity style={styles.viewDetailsButton} onPress={() => {viewDetails(ride)}}>
         <Text style={styles.viewDetailsText}>View Details</Text>
@@ -48,8 +55,8 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#F2F2F7",
     paddingHorizontal: 30,
-    paddingVertical: 30,
-    marginVertical: 13,
+    paddingVertical: 28,
+    marginVertical: 12,
     borderRadius: 30
   },
   detailsCard: {
@@ -67,8 +74,8 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   icon: {
-    height: 18,
-    width: 18,
+    height: 20,
+    width: 20,
     marginRight: 10
   },
   detailsContainer: {
@@ -83,7 +90,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     paddingVertical: 8,
     paddingHorizontal: 15,
-    marginTop: 10,
+    marginTop: 12,
     borderRadius: 15,
     borderColor: "#0057FF",
     borderWidth: 2,

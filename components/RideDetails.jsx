@@ -11,6 +11,7 @@ import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 
 const RideDetails = ({ navigation, route }) => {
   const ride = route.params?.ride;
+
   if (!ride) {
     return (
       <View style={styles.container}>
@@ -18,6 +19,18 @@ const RideDetails = ({ navigation, route }) => {
       </View>
     );
   }
+
+  const datetime = new Date(ride.date_time);
+
+  const date = datetime.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  });
+
+  const time = (datetime.getHours() > 12 ? datetime.getHours() - 12 : datetime.getHours()).toString().padStart(2, '0')
+   + ":" + datetime.getMinutes().toString().padStart(2, '0')
+   + " " + (datetime.getHours() >= 12 ? "PM" : "AM");
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 20 }}>
@@ -37,22 +50,23 @@ const RideDetails = ({ navigation, route }) => {
 
       {/* Ride Info */}
       <View style={styles.rideInfoContainer}>
-        <Text style={styles.rideTitle}>{ride.title}</Text>
+        <Text style={styles.rideTitle}>{ride.ride_name}</Text>
         <View style={styles.dateTime}>
           <MaterialIcons name="event" size={18} color="#666" />
           <Text style={styles.dateText}>
-            {ride.date}, {ride.day} • {ride.time}
+            {date}  •  {time}
+            {/* {ride.date}, {ride.day} • {ride.time} */}
           </Text>
         </View>
 
         {/* Start & End Locations */}
         <View style={styles.locationContainer}>
           <MaterialIcons name="place" size={20} color="green" />
-          <Text style={styles.locationText}>Start : {ride.location}</Text>
+          <Text style={styles.locationText}>Start : {ride.start_location}</Text>
         </View>
         <View style={styles.locationContainer}>
           <MaterialIcons name="flag" size={20} color="red" />
-          <Text style={styles.locationText}>End : TBD</Text>
+          <Text style={styles.locationText}>End : {ride.end_location}</Text>
         </View>
 
         {/* Distance, Duration, Difficulty */}

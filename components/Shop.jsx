@@ -2,6 +2,7 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator }
 import React, { useEffect, useState } from 'react';
 import { MaterialIcons } from "@expo/vector-icons";
 import ShopItem from './ShopItem';
+import Constants from "expo-constants";
 
 const Shop = ({ navigation }) => {
   const [items, setItems] = useState([]);
@@ -10,7 +11,7 @@ const Shop = ({ navigation }) => {
   useEffect(() => {
     const fetchMerchandise = async () => {
       try {
-        const response = await fetch("http://192.168.131.68:5000/merchandise");
+        const response = await fetch(`http://${Constants.expoConfig?.hostUri?.split(":")[0]}:5000/merchandise`);
         const data = await response.json();
         setItems(data);
       } catch (error) {

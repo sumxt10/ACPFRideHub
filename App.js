@@ -11,6 +11,7 @@ import SuccessfulRegistration from "./components/SuccessfulRegistration";
 import Shop from "./components/Shop";
 import ItemDetails from "./components/ItemDetails";
 import EmergencyCall from "./components/EmergencyCall";
+import PaymentConfirmation from "./components/PaymentConfirmation";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
         <Stack.Screen name="RideDetails" component={RideDetails} />
         <Stack.Screen name="RideEnrollment" component={RideEnrollment} />
         <Stack.Screen name="SuccessfulRegistration" component={SuccessfulRegistration} />
+        <Stack.Screen name="PaymentConfirmation" component={PaymentConfirmation} />
         <Stack.Screen name="Shop" component={Shop} />
         <Stack.Screen name="ItemDetails" component={ItemDetails} />
         <Stack.Screen name="EmergencyCall" component={EmergencyCall} />

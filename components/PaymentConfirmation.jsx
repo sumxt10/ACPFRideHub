@@ -21,6 +21,20 @@ const PaymentConfirmation = ({ navigation, route }) => {
     );
   }
 
+  const datetime = new Date(ride.date_time);
+
+  const date = datetime.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  });
+  const day = datetime.toLocaleDateString('en-US', {
+    weekday: 'short'
+  });
+  const time = (datetime.getHours() > 12 ? datetime.getHours() - 12 : datetime.getHours()).toString().padStart(2, '0')
+   + ":" + datetime.getMinutes().toString().padStart(2, '0')
+   + " " + (datetime.getHours() >= 12 ? "PM" : "AM");
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F8F9FB" }} contentContainerStyle={{ paddingBottom: 60 }}>
       <ScrollView
@@ -38,9 +52,9 @@ const PaymentConfirmation = ({ navigation, route }) => {
 
         {/* Ride Details */}
         <View style={styles.rideCard}>
-          <Text style={styles.rideTitle}>{ride.title}</Text>
+          <Text style={styles.rideTitle}>{ride.ride_name}</Text>
           <Text style={styles.rideDate}>
-            {ride.date} • {ride.time || "6:00 AM"}
+            {date} • {time || "6:00 AM"}
           </Text>
 
           {/* Start & End Points */}
@@ -49,7 +63,7 @@ const PaymentConfirmation = ({ navigation, route }) => {
               <FontAwesome5 name="circle" size={10} color="green" />
               <View style={styles.routeTextContainer}>
                 <Text style={styles.routeTitle}>
-                  Start: {ride.startLocation}
+                  Start: {ride.start_location}
                 </Text>
                 <Text style={styles.routeSubText}>
                   Meeting point at main entrance
@@ -60,7 +74,7 @@ const PaymentConfirmation = ({ navigation, route }) => {
             <View style={styles.routeItem}>
               <FontAwesome5 name="circle" size={10} color="red" />
               <View style={styles.routeTextContainer}>
-                <Text style={styles.routeTitle}>End: {ride.endLocation}</Text>
+                <Text style={styles.routeTitle}>End: {ride.end_location}</Text>
                 <Text style={styles.routeSubText}>
                   Finish line at visitor center
                 </Text>

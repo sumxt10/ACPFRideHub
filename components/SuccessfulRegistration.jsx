@@ -4,6 +4,20 @@ import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 
 const SuccessfulRegistration = ({ navigation, route }) => {
   const ride = route.params?.ride;
+  const datetime = new Date(ride.date_time);
+
+  const date = datetime.toLocaleDateString('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+  });
+  const day = datetime.toLocaleDateString('en-US', {
+    weekday: 'short'
+  });
+
+  const time = (datetime.getHours() > 12 ? datetime.getHours() - 12 : datetime.getHours()).toString().padStart(2, '0')
+   + ":" + datetime.getMinutes().toString().padStart(2, '0')
+   + " " + (datetime.getHours() >= 12 ? "PM" : "AM");
 
   return (
     <View style={styles.container}>
@@ -20,22 +34,26 @@ const SuccessfulRegistration = ({ navigation, route }) => {
 
         {/* Ride Details */}
         <View style={styles.cardContainer}>
-          <Text style={styles.rideTitle}>{ride.title}</Text>
+          <Text style={styles.rideTitle}>{ride.ride_name}</Text>
           <View style={styles.detailsContainer}>
-            <Image source={require("../assets/calendar.png")} style={styles.icon}></Image>
-            <Text style={styles.details}>{ride.date}</Text>
+            <MaterialIcons name="event" size={18} color="black" style={styles.icon} />
+            <Text style={styles.details}>{date}  ({day})</Text>
           </View>
           <View style={styles.detailsContainer}>
-            <Image source={require("../assets/clock.png")} style={styles.icon}></Image>
-            <Text style={styles.details}>{ride.time}</Text>
+                    <MaterialIcons name="schedule" size={18} color="black" style={styles.icon} />
+            <Text style={styles.details}>{time}</Text>
           </View>
           <View style={styles.detailsContainer}>
-            <Image source={require("../assets/location.png")} style={styles.icon}></Image>
-            <Text style={styles.details}>{ride.location}</Text>
+            <MaterialIcons name="place" size={18} color="green" style={styles.icon} />
+            <Text style={styles.details}>Start : {ride.start_location}</Text>
+          </View>
+          <View style={styles.detailsContainer}>
+            <MaterialIcons name="place" size={18} color="red" style={styles.icon} />
+            <Text style={styles.details}>End : {ride.end_location}</Text>
           </View>
           <View style={styles.detailsContainer}>
             <Image source={require("../assets/distance.png")} style={styles.icon}></Image>
-            <Text style={styles.details}>{ride.distance}</Text>
+            <Text style={styles.details}>{ride.distance} km</Text>
           </View>
         </View>
       </View>
@@ -91,23 +109,18 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#F2F2F7",
     paddingHorizontal: 30,
-    paddingVertical: 35,
+    paddingVertical: 25,
     marginVertical: 40
-  },
-  detailsCard: {
-    backgroundColor: "white",
-    paddingHorizontal: 25,
-    paddingVertical: 18,
-    borderRadius: 15
   },
   rideTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 10
+    marginBottom: 15,
+    alignSelf: "center"
   },
   icon: {
-    height: 16,
-    width: 16,
+    height: 18,
+    width: 18,
     marginRight: 10
   },
   detailsContainer: {
